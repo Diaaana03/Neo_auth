@@ -1,0 +1,109 @@
+.register__section {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  display: flex;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+
+.login__img {
+  max-width: 100%;
+  height: auto;
+  position: relative;
+}
+
+h1 {
+  margin: 10px 0;
+  text-align: center;
+  font-size: 48px;
+  font-weight: 500;
+}
+
+p {
+  font-size: 28px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  margin: 20px;
+}
+
+.right__h2 {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.input__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+input {
+  height: 5.2rem;
+  padding: 0 16px;
+  border-radius: 12px;
+  background: #f8f8f8;
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  margin-bottom: 14px;
+  border: none;
+}
+
+.register__btn {
+  width: 343px;
+  height: 52px;
+  border-radius: 15px;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #292929;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.register__btn:hover {
+  text-decoration: underline;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.back__btn {
+  cursor: pointer;
+  color: #000;
+  font-weight: 500;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 3rem;
+  margin-left: -18rem;
+}
+
+.back__btn:hover {
+  text-decoration: underline;
+}
+
+.arrow__img {
+  margin-right: 1.5rem;
+}
