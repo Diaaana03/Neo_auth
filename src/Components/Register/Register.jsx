@@ -1,4 +1,5 @@
 import React from "react";
+import { Formik, Form, ErrorMessage, Field } from "formik";
 import classes from "./Register.module.css";
 import { Link } from "react-router-dom";
 import loginImg from "../../Assets/Images/LoginImg.svg";
@@ -24,25 +25,27 @@ export const Register = () => {
           </div>
         </Link>
         <h2 className={classes.right__h2}>Create a Lorby account</h2>
-        <form>
-          <div className={classes.input__container}>
-            <input type="text" id="login" placeholder="Email" name="login" />
-            <input type="text" id="login" placeholder="Login" name="login" />
-            <input
-              placeholder="Create a password"
-              name="password"
-              id="password"
-            />
-            <input
-              placeholder="Repeat a password"
-              name="password"
-              id="password"
-            />
-          </div>
-          <button type="submit" className={classes.register__btn}>
-            Sign up
-          </button>
-        </form>
+        <Formik>
+          <Form>
+            <div className={classes.input__container}>
+              <Field type="text" id="Email" placeholder="Email" name="Email" />
+              <Field type="text" id="login" placeholder="Login" name="login" />
+              <Field
+                placeholder="Create a password"
+                name="password"
+                id="password"
+              />
+              <Field
+                placeholder="Repeat a password"
+                name="password"
+                id="password"
+              />
+            </div>
+            <button type="submit" className={classes.register__btn}>
+              Sign up
+            </button>
+          </Form>
+        </Formik>
       </div>
     </div>
   );

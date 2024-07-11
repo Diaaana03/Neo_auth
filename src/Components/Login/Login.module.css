@@ -62,6 +62,17 @@ input {
   border: none;
 }
 
+.input__password {
+  position: relative;
+}
+
+.eyeOpen__img {
+  position: absolute;
+  right: 21rem;
+  margin-top: 1.6rem;
+  cursor: pointer;
+}
+
 .login__btn {
   width: 343px;
   height: 52px;
