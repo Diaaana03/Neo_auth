@@ -77,9 +77,9 @@ export const Register = () => {
                 <div className={classes.input__container}>
                   <Field
                     type="text"
-                    id="Email"
+                    id="email"
                     placeholder="Email"
-                    name="Email"
+                    name="email"
                   />
                   <ErrorMessage
                     name="email"
@@ -93,7 +93,7 @@ export const Register = () => {
                     name="login"
                   />
                   <ErrorMessage
-                    name="email"
+                    name="login"
                     component="div"
                     className={classes.error__message}
                   />
@@ -108,11 +108,6 @@ export const Register = () => {
                     className={classes.eyeOpen__img}
                     alt="eye opened"
                     onClick={handlePasswordShow}
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className={classes.error__message}
                   />
                   <ul className={classes.validation__ul}>
                     <li
@@ -163,12 +158,12 @@ export const Register = () => {
                   </ul>
                   <Field
                     placeholder="Repeat a password"
-                    name="password"
-                    id="password"
+                    name="confirmPassword"
+                    id="confirmPassword"
                     type={showPassword ? "text" : "password"}
                   />
                   <ErrorMessage
-                    name="email"
+                    name="confirmPassword"
                     component="div"
                     className={classes.error__message}
                   />

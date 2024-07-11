@@ -136,3 +136,10 @@ input {
 .validation__li_invalid {
   color: red;
 }
+
+.error__message {
+  font-size: 12px;
+  color: red;
+  margin-bottom: 8px;
+  margin-top: -10px;
+}

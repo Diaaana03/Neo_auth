@@ -13,8 +13,8 @@ export const Login = () => {
 
   const handlePasswordShow = () => setShowPassword(!showPassword);
 
-  const handleLogin = ({ username, password }) => {
-    console.log("Logging in with", username, password);
+  const handleLogin = ({ login, password }) => {
+    console.log("Logging in with", login, password);
   };
 
   const {
@@ -58,10 +58,16 @@ export const Login = () => {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.login}
-          />
+            className={errors.login && touched.login ? classes.error : ""}
+          />{" "}
+          {errors.login && touched.login && (
+            <div className={classes.error__message}>{errors.login}</div>
+          )}
           <div className={classes.input__container}>
             <input
-              className={classes.input__password}
+              className={
+                errors.password && touched.password ? classes.error : ""
+              }
               placeholder="Password"
               name="password"
               id="password"
@@ -70,6 +76,9 @@ export const Login = () => {
               value={values.password}
               type={showPassword ? "text" : "password"}
             />
+            {errors.password && touched.password && (
+              <div className={classes.error__message}>{errors.password}</div>
+            )}
             <img
               src={showPassword ? eyeClosed : eyeOpen}
               className={classes.eyeOpen__img}
@@ -77,8 +86,12 @@ export const Login = () => {
               onClick={handlePasswordShow}
             />
           </div>
-          <button type="submit" className={classes.login__btn}>
-            Log in
+          <button
+            type="submit"
+            className={classes.login__btn}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Logging in..." : "Log in"}
           </button>
           <Link to="/register">
             <h3 className={classes.right__h3}>I don't have an account</h3>

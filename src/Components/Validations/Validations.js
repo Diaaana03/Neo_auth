@@ -11,7 +11,7 @@ export const registerSchema = yup.object().shape({
 
   login: yup
     .string()
-    .min(4, "Min 4 characters")
+    .min(4, "At least 4 characters required")
     .matches(/^[A-Za-z]*$/, "Only Latin letters")
     .required("Login required"),
 
