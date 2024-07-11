@@ -62,15 +62,18 @@ input {
   border: none;
 }
 
-.input__password {
+.input__container {
   position: relative;
+  width: 100%;
 }
 
 .eyeOpen__img {
   position: absolute;
-  right: 21rem;
-  margin-top: 1.6rem;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
+  margin-top: -8px;
 }
 
 .login__btn {
@@ -104,4 +107,11 @@ input {
 
 .right__h3:hover {
   text-decoration: underline;
+}
+
+.error__message {
+  font-size: 12px;
+  color: red;
+  margin-bottom: 8px;
+  margin-top: -10px;
 }

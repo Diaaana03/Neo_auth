@@ -22,6 +22,7 @@ const validatePassword = (password) => {
 
 export const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordValidations, setPasswordValidations] = useState({
     uppercase: false,
     lowercase: false,
@@ -31,6 +32,9 @@ export const Register = () => {
   });
 
   const handlePasswordShow = () => setShowPassword(!showPassword);
+  const handleConfirmPasswordShow = () =>
+    setShowConfirmPassword(!showConfirmPassword);
+
   return (
     <div className={classes.register__section}>
       <div className={classes.left}>
@@ -71,7 +75,6 @@ export const Register = () => {
             ) {
               setPasswordValidations(validations);
             }
-            // setPasswordValidations(validations);
             return (
               <Form>
                 <div className={classes.input__container}>
@@ -80,6 +83,7 @@ export const Register = () => {
                     id="email"
                     placeholder="Email"
                     name="email"
+                    className={classes.input}
                   />
                   <ErrorMessage
                     name="email"
@@ -91,24 +95,28 @@ export const Register = () => {
                     id="login"
                     placeholder="Login"
                     name="login"
+                    className={classes.input}
                   />
                   <ErrorMessage
                     name="login"
                     component="div"
                     className={classes.error__message}
                   />
-                  <Field
-                    placeholder="Create a password"
-                    name="password"
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                  />
-                  <img
-                    src={showPassword ? eyeClosed : eyeOpen}
-                    className={classes.eyeOpen__img}
-                    alt="eye opened"
-                    onClick={handlePasswordShow}
-                  />
+                  <div className={classes.input__password}>
+                    <Field
+                      placeholder="Create a password"
+                      name="password"
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      className={classes.input}
+                    />
+                    <img
+                      src={showPassword ? eyeClosed : eyeOpen}
+                      className={classes.eyeOpen__img}
+                      alt="eye opened"
+                      onClick={handlePasswordShow}
+                    />
+                  </div>
                   <ul className={classes.validation__ul}>
                     <li
                       className={
@@ -156,12 +164,21 @@ export const Register = () => {
                       8-15 characters long
                     </li>
                   </ul>
-                  <Field
-                    placeholder="Repeat a password"
-                    name="confirmPassword"
-                    id="confirmPassword"
-                    type={showPassword ? "text" : "password"}
-                  />
+                  <div className={classes.input__password}>
+                    <Field
+                      placeholder="Repeat a password"
+                      name="confirmPassword"
+                      id="confirmPassword"
+                      type={showConfirmPassword ? "text" : "password"}
+                      className={classes.input}
+                    />
+                    <img
+                      src={showConfirmPassword ? eyeClosed : eyeOpen}
+                      className={classes.eyeOpen__img}
+                      alt="eye opened"
+                      onClick={handleConfirmPasswordShow}
+                    />
+                  </div>
                   <ErrorMessage
                     name="confirmPassword"
                     component="div"

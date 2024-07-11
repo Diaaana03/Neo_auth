@@ -76,9 +76,6 @@ export const Login = () => {
               value={values.password}
               type={showPassword ? "text" : "password"}
             />
-            {errors.password && touched.password && (
-              <div className={classes.error__message}>{errors.password}</div>
-            )}
             <img
               src={showPassword ? eyeClosed : eyeOpen}
               className={classes.eyeOpen__img}
@@ -86,6 +83,9 @@ export const Login = () => {
               onClick={handlePasswordShow}
             />
           </div>
+          {errors.password && touched.password && (
+            <div className={classes.error__message}>{errors.password}</div>
+          )}
           <button
             type="submit"
             className={classes.login__btn}

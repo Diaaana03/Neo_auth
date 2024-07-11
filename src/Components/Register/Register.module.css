@@ -55,9 +55,11 @@ p {
   flex-direction: column;
   align-items: center;
   align-content: center;
+  width: 100%;
 }
 
-input {
+.input {
+  width: 343px;
   height: 5.2rem;
   padding: 0 16px;
   border-radius: 12px;
@@ -67,6 +69,7 @@ input {
   line-height: 1.5;
   margin-bottom: 14px;
   border: none;
+  box-sizing: border-box;
 }
 
 .register__btn {
@@ -120,13 +123,16 @@ input {
 
 .input__password {
   position: relative;
+  width: 343px;
 }
 
 .eyeOpen__img {
   position: absolute;
-  top: 33.5rem;
-  margin-right: -28rem;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
+  margin-top: -8px;
 }
 
 .validation__li_valid {
