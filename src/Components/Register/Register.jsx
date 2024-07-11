@@ -65,7 +65,13 @@ export const Register = () => {
         >
           {({ values, isSubmitting, handleChange }) => {
             const validations = validatePassword(values.password);
-            setPasswordValidations(validations);
+            if (
+              JSON.stringify(validations) !==
+              JSON.stringify(passwordValidations)
+            ) {
+              setPasswordValidations(validations);
+            }
+            // setPasswordValidations(validations);
             return (
               <Form>
                 <div className={classes.input__container}>
@@ -109,19 +115,49 @@ export const Register = () => {
                     className={classes.error__message}
                   />
                   <ul className={classes.validation__ul}>
-                    <li className={classes.validation__li}>
+                    <li
+                      className={
+                        passwordValidations.uppercase
+                          ? classes.validation__li_valid
+                          : classes.validation__li_invalid
+                      }
+                    >
                       At least one uppercase letter
                     </li>
-                    <li className={classes.validation__li}>
+                    <li
+                      className={
+                        passwordValidations.lowercase
+                          ? classes.validation__li_valid
+                          : classes.validation__li_invalid
+                      }
+                    >
                       At least one lowercase letter
                     </li>
-                    <li className={classes.validation__li}>
+                    <li
+                      className={
+                        passwordValidations.number
+                          ? classes.validation__li_valid
+                          : classes.validation__li_invalid
+                      }
+                    >
                       At least one number
                     </li>
-                    <li className={classes.validation__li}>
+                    <li
+                      className={
+                        passwordValidations.specialChar
+                          ? classes.validation__li_valid
+                          : classes.validation__li_invalid
+                      }
+                    >
                       At least one special character
                     </li>
-                    <li className={classes.validation__li}>
+                    <li
+                      className={
+                        passwordValidations.length
+                          ? classes.validation__li_valid
+                          : classes.validation__li_invalid
+                      }
+                    >
                       8-15 characters long
                     </li>
                   </ul>
@@ -129,6 +165,7 @@ export const Register = () => {
                     placeholder="Repeat a password"
                     name="password"
                     id="password"
+                    type={showPassword ? "text" : "password"}
                   />
                   <ErrorMessage
                     name="email"

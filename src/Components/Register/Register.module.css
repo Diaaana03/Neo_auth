@@ -124,11 +124,15 @@ input {
 
 .eyeOpen__img {
   position: absolute;
-  top: 33rem;
+  top: 33.5rem;
   margin-right: -28rem;
   cursor: pointer;
 }
 
-.error__message {
+.validation__li_valid {
+  color: green;
+}
+
+.validation__li_invalid {
   color: red;
 }
