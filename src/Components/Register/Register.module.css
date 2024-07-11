@@ -107,3 +107,28 @@ input {
 .arrow__img {
   margin-right: 1.5rem;
 }
+
+.validation__ul {
+  margin-bottom: 12px;
+  margin-left: -10rem;
+}
+
+.validation__li {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.input__password {
+  position: relative;
+}
+
+.eyeOpen__img {
+  position: absolute;
+  top: 33rem;
+  margin-right: -28rem;
+  cursor: pointer;
+}
+
+.error__message {
+  color: red;
+}

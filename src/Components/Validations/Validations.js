@@ -21,8 +21,8 @@ export const registerSchema = yup.object().shape({
     .max(15, "8 - 15 characters")
     .matches(/[a-z]/, "At least one lowercase letter")
     .matches(/[A-Z]/, "At least one capital letter")
-    .matches(/\d/, "Min one number")
-    .matches(/[^a-zA-Z0-9]/, 'Min one special character (!, ", #, $...)')
+    .matches(/\d/, "At least one number")
+    .matches(/[^a-zA-Z0-9]/, 'At least one special character (!, ", #, $...)')
     .required("Password required"),
 
   confirmPassword: yup
@@ -44,7 +44,7 @@ export const loginSchema = yup.object().shape({
     .max(15, "8 - 15 characters")
     .matches(/[a-z]/, "At least one lowercase letter")
     .matches(/[A-Z]/, "At least one capital letter")
-    .matches(/\d/, "Min one number")
-    .matches(/[^a-zA-Z0-9]/, 'Min one special character (!, ", #, $...)')
+    .matches(/\d/, "At least one number")
+    .matches(/[^a-zA-Z0-9]/, 'At least one special character (!, ", #, $...)')
     .required("Password required"),
 });
