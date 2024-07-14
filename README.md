@@ -19,7 +19,7 @@ Lorby is a form app with login and registration functions. It was created in tra
 To set up the project locally, follow these steps:
 
 1. Clone the repository via command: 
-git clone https://github.com/Diaaana03/Neotour
+git clone https://github.com/Diaaana03/Neo_auth
 2. Install dependencies via command: 
 npm install
 3. Start the development server via command: 
