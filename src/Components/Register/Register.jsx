@@ -185,9 +185,11 @@ export const Register = () => {
                     className={classes.error__message}
                   />
                 </div>
-                <button type="submit" className={classes.register__btn}>
-                  Sign up
-                </button>
+                <Link to="/Email">
+                  <button type="submit" className={classes.register__btn}>
+                    Sign up
+                  </button>
+                </Link>
               </Form>
             );
           }}

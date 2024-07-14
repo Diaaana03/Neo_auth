@@ -1,6 +1,9 @@
 import React from "react";
 import { useFormik } from "formik";
 import { useState } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { loginSchema } from "../Validations/Validations";
 import classes from "./Login.module.css";
 import { Link } from "react-router-dom";
@@ -9,12 +12,20 @@ import eyeOpen from "../../Assets/Images/eyeOpen.svg";
 import eyeClosed from "../../Assets/Images/eyeClosed.svg";
 
 export const Login = () => {
+  const postLogin = "https://pudge-backender.org.kg/login/";
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handlePasswordShow = () => setShowPassword(!showPassword);
 
-  const handleLogin = ({ login, password }) => {
-    console.log("Logging in with", login, password);
+  const handleLogin = async (data) => {
+    try {
+      const response = await axios.post(postLogin, data);
+      //console.log(response.data);
+    } catch (err) {
+      console.log(err);
+      toast.error("Login failed! " + err.message);
+    }
   };
 
   const {
@@ -32,12 +43,14 @@ export const Login = () => {
     },
     validationSchema: loginSchema,
     onSubmit: (values, actions) => {
-      console.log("submit");
       handleLogin({ username: values.login, password: values.password });
+      actions.setSubmitting(false);
     },
   });
+
   return (
     <div className={classes.login__section}>
+      <ToastContainer />
       <div className={classes.left}>
         <div className={classes.login__img}>
           <img src={loginImg} alt="lorby" />
@@ -59,7 +72,7 @@ export const Login = () => {
             onBlur={handleBlur}
             value={values.login}
             className={errors.login && touched.login ? classes.error : ""}
-          />{" "}
+          />
           {errors.login && touched.login && (
             <div className={classes.error__message}>{errors.login}</div>
           )}
