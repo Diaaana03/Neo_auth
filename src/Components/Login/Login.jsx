@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginSchema } from "../Validations/Validations";
 import classes from "./Login.module.css";
-import { Link } from "react-router-dom";
 import loginImg from "../../Assets/Images/LoginImg.svg";
 import eyeOpen from "../../Assets/Images/eyeOpen.svg";
 import eyeClosed from "../../Assets/Images/eyeClosed.svg";
 
 export const Login = () => {
   const postLogin = "https://pudge-backender.org.kg/login/";
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -21,22 +21,20 @@ export const Login = () => {
   const handleLogin = async (data) => {
     try {
       const response = await axios.post(postLogin, data);
-      //console.log(response.data);
+      // Assuming a successful response contains user data
+      if (response.status === 200) {
+        toast.success("Login successful!");
+        navigate("/account");
+      }
     } catch (err) {
       console.log(err);
-      toast.error("Login failed! " + err.message);
+      toast.error(
+        "Login failed! " + (err.response?.data?.detail || err.message)
+      );
     }
   };
 
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    isSubmitting,
-  } = useFormik({
+  const formik = useFormik({
     initialValues: {
       login: "",
       password: "",
@@ -62,31 +60,35 @@ export const Login = () => {
       </div>
       <div className={classes.right}>
         <h2 className={classes.right__h2}>Welcome back!</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           <input
             type="text"
             id="login"
             placeholder="Login"
             name="login"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.login}
-            className={errors.login && touched.login ? classes.error : ""}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.login}
+            className={
+              formik.errors.login && formik.touched.login ? classes.error : ""
+            }
           />
-          {errors.login && touched.login && (
-            <div className={classes.error__message}>{errors.login}</div>
+          {formik.errors.login && formik.touched.login && (
+            <div className={classes.error__message}>{formik.errors.login}</div>
           )}
           <div className={classes.input__container}>
             <input
               className={
-                errors.password && touched.password ? classes.error : ""
+                formik.errors.password && formik.touched.password
+                  ? classes.error
+                  : ""
               }
               placeholder="Password"
               name="password"
               id="password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
               type={showPassword ? "text" : "password"}
             />
             <img
@@ -96,15 +98,17 @@ export const Login = () => {
               onClick={handlePasswordShow}
             />
           </div>
-          {errors.password && touched.password && (
-            <div className={classes.error__message}>{errors.password}</div>
+          {formik.errors.password && formik.touched.password && (
+            <div className={classes.error__message}>
+              {formik.errors.password}
+            </div>
           )}
           <button
             type="submit"
             className={classes.login__btn}
-            disabled={isSubmitting}
+            disabled={formik.isSubmitting}
           >
-            {isSubmitting ? "Logging in..." : "Log in"}
+            {formik.isSubmitting ? "Logging in..." : "Log in"}
           </button>
           <Link to="/register">
             <h3 className={classes.right__h3}>I don't have an account</h3>

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
-import { useState } from "react";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
 import { registerSchema } from "../Validations/Validations";
 import classes from "./Register.module.css";
-import { Link } from "react-router-dom";
 import loginImg from "../../Assets/Images/LoginImg.svg";
 import backArrow from "../../Assets/Images/backArrow.svg";
 import eyeOpen from "../../Assets/Images/eyeOpen.svg";
@@ -21,19 +21,36 @@ const validatePassword = (password) => {
 };
 
 export const Register = () => {
+  const postRegister = "https://pudge-backender.org.kg/register/";
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [passwordValidations, setPasswordValidations] = useState({
-    uppercase: false,
-    lowercase: false,
-    number: false,
-    specialChar: false,
-    length: false,
-  });
 
   const handlePasswordShow = () => setShowPassword(!showPassword);
   const handleConfirmPasswordShow = () =>
     setShowConfirmPassword(!showConfirmPassword);
+
+  const handleSubmit = async (values, { setSubmitting }) => {
+    const payload = {
+      email: values.email,
+      username: values.login,
+      password: values.password,
+    };
+    try {
+      console.log("Submitting payload:", payload);
+      const response = await axios.post(postRegister, payload);
+      console.log("Response data:", response.data);
+      setSubmitting(false);
+      navigate("/email");
+    } catch (error) {
+      if (error.response) {
+        console.error("Error response:", error.response.data);
+      } else {
+        console.error("Error message:", error.message);
+      }
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className={classes.register__section}>
@@ -62,19 +79,11 @@ export const Register = () => {
             confirmPassword: "",
           }}
           validationSchema={registerSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            console.log(values);
-            setSubmitting(false);
-          }}
+          onSubmit={handleSubmit}
         >
-          {({ values, isSubmitting, handleChange }) => {
-            const validations = validatePassword(values.password);
-            if (
-              JSON.stringify(validations) !==
-              JSON.stringify(passwordValidations)
-            ) {
-              setPasswordValidations(validations);
-            }
+          {({ values, isSubmitting }) => {
+            const passwordValidations = validatePassword(values.password);
+
             return (
               <Form>
                 <div className={classes.input__container}>
@@ -185,11 +194,13 @@ export const Register = () => {
                     className={classes.error__message}
                   />
                 </div>
-                <Link to="/Email">
-                  <button type="submit" className={classes.register__btn}>
-                    Sign up
-                  </button>
-                </Link>
+                <button
+                  type="submit"
+                  className={classes.register__btn}
+                  disabled={isSubmitting}
+                >
+                  Sign up
+                </button>
               </Form>
             );
           }}
